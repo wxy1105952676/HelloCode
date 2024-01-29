@@ -1,13 +1,13 @@
-/* 
+/*
  * @Author: wxy
  * @Date: 2023-02-28 11:26:07
  * @LastEditors: wxy
- * @LastEditTime: 2023-02-28 12:26:47
- * @FilePath: \AcWing\算法基础课\2.数据结构\2.1单链表\单链表.cpp
- * @Description: 
+ * @LastEditTime: 2024-01-29 21:44:15
+ * @FilePath: \HelloCode\AcWing\算法基础课\2.数据结构\2.1单链表\单链表.cpp
+ * @Description:
  * @
- * @Copyright (c) 2023 by Author, All Rights Reserved. 
-*/
+ * @Copyright (c) 2023 by Author, All Rights Reserved.
+ */
 #include <iostream>
 
 using namespace std;
@@ -21,63 +21,50 @@ const int N = 100010;
 int head, e[N], ne[N], idx;
 
 // 初始化
-void init()
-{
-    head = -1;
-    idx = 0;
+void init() {
+  head = -1;
+  idx = 0;
 }
 
 // 将x插到头结点
-void add_to_head(int x)
-{
-    e[idx] = x, ne[idx] = head, head = idx ++ ;
-}
+void add_to_head(int x) { e[idx] = x, ne[idx] = head, head = idx++; }
 
 // 将x插到下标是k的点后面
-void add(int k, int x)
-{
-    e[idx] = x, ne[idx] = ne[k], ne[k] = idx ++ ;
-}
+void add(int k, int x) { e[idx] = x, ne[idx] = ne[k], ne[k] = idx++; }
 
 // 将下标是k的点后面的点删掉
-void remove(int k)
-{
-    ne[k] = ne[ne[k]];
-}
+void remove(int k) { ne[k] = ne[ne[k]]; }
 
-int main()
-{
-    int m;
-    cin >> m;
+int main() {
+  int m;
+  cin >> m;
 
-    init();
+  init();
 
-    while (m -- )
-    {
-        int k, x;
-        char op;
+  while (m--) {
 
-        cin >> op;
-        if (op == 'H')
-        {
-            cin >> x;
-            add_to_head(x);
-        }
-        else if (op == 'D')
-        {
-            cin >> k;
-            if (!k) head = ne[head];
-            else remove(k - 1);
-        }
-        else
-        {
-            cin >> k >> x;
-            add(k - 1, x);
-        }
+    int k, x;
+    char op;
+
+    cin >> op;
+    if (op == 'H') {
+      cin >> x;
+      add_to_head(x);
+    } else if (op == 'D') {
+      cin >> k;
+      if (!k)
+        head = ne[head];
+      else
+        remove(k - 1);
+    } else {
+      cin >> k >> x;
+      add(k - 1, x);
     }
+  }
 
-    for (int i = head; i != -1; i = ne[i]) cout << e[i] << ' ';
-    cout << endl;
+  for (int i = head; i != -1; i = ne[i])
+    cout << e[i] << ' ';
+  cout << endl;
 
-    return 0;
+  return 0;
 }
